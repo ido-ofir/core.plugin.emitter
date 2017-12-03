@@ -3,7 +3,7 @@
 
 
 module.exports = {
-    name: 'core.eventEmitter',
+    name: 'core.plugin.emitter',
     init(plugin, done) {
 
         var core = this;
