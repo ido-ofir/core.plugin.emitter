@@ -9,35 +9,35 @@ module.exports = {
         var core = this;
 
         var emitter = {
-            events: {},
+            _events: {},
             on(eventName, listener) { // return false in listener to stop the event
-                var event = this.events[eventName];
+                var event = this._events[eventName];
                 if (!event) {
-                    event = this.events[eventName] = [];
+                    event = this._events[eventName] = [];
                 }
                 event.push(listener);
                 return this;
             },
             off(eventName, listener) {
                 if (!eventName) {
-                    this.events = {};
+                    this._events = {};
                     return this;
                 }
                 if (!listener) {
-                    delete this.events[eventName];
+                    delete this._events[eventName];
                     return this;
                 }
-                var event = this.events[eventName];
+                var event = this._events[eventName];
                 if (event) {
-                    event = this.events[eventName] = event.filter((l) => {
+                    event = this._events[eventName] = event.filter((l) => {
                         return (l !== listener);
                     });
-                    if (!event.length) delete this.events[eventName];
+                    if (!event.length) delete this._events[eventName];
                 }
                 return this;
             },
             emit(eventName) {
-                var cont, event = this.events[eventName];
+                var cont, event = this._events[eventName];
                 if (!event) return;
                 var args = [].slice.call(arguments, 1);
                 for (var i = 0; i < event.length; i++) {
@@ -50,7 +50,7 @@ module.exports = {
 
         function Emitter(target){
             target = target || {};
-            core.assign(target, emitter);
+            Object.assign(target, emitter);
         }
 
         this.extend({ Emitter: Emitter });
