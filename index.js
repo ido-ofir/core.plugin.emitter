@@ -51,6 +51,7 @@ module.exports = {
         function Emitter(target){
             target = target || {};
             Object.assign(target, emitter);
+            target._events = {};
         }
 
         this.extend({ Emitter: Emitter });
