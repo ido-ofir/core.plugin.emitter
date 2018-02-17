@@ -1,6 +1,6 @@
 {
     "name": "core.plugin.emitter",
-    "version": "0.0.9",
+    "version": "1.0.0",
     "description": "A tiny event emitter.",
     "main": "index.js",
     "scripts": {
