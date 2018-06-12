@@ -45,6 +45,14 @@ module.exports = {
                     if (cont === false) break;
                 }
                 return this;
+            },
+            once(eventName, listener){
+                var t = this;
+                var l = function(a,b,c,d,e){
+                    t.off(eventName, l)
+                    listener(a,b,c,d,e);
+                }
+                t.on(eventName, l)
             }
         };
 
@@ -52,6 +60,7 @@ module.exports = {
             target = target || {};
             Object.assign(target, emitter);//
             target._events = {};
+            return target;
         }
 
         this.extend({ Emitter: Emitter });
